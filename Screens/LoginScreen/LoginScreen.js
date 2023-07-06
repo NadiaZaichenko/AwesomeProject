@@ -12,22 +12,16 @@ const LoginScreen = () => {
   }
   const [state, setState] = useState(initialState);
   const [isPasswordSecure, setIsPasswordSecure] = useState(true);
-  const [showBoard, setShowBoard] = useState("");
+  const [showBoard, setShowBoard] = useState(false);
   
   useEffect(() => {
-    // const visibleBoard = Keyboard.isVisible;
-    // if(visibleBoard) {
-    //   setShowBoard('true')
-    // }
-    // setShowBoard('false')
-    const boardIsShow = Keyboard.addListener('keyboardDidShow', () => { 
-      setShowBoard("true");
+    const boardIsShow = Keyboard.addListener('keyboardWillShow', () => { 
+      setShowBoard(true);
     });
-    const boardIsHide =  Keyboard.addListener('keyboardDidHide', () => {
-      setShowBoard("false");
+    const boardIsHide =  Keyboard.addListener('keyboardWillHide', () => {
+      setShowBoard(false);
     });
      return () => {
-      // Keyboard.addListener.removeEventListener();
         boardIsShow.removeEventListener();
         boardIsHide.removeEventListener();
      } 
@@ -35,7 +29,6 @@ const LoginScreen = () => {
 
   function submitForm (){
     Keyboard.dismiss(); 
-    // setShowBoard('false');
     console.log(state);
     console.log(showBoard);
     setState(initialState);
