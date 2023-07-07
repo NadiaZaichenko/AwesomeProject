@@ -14,6 +14,34 @@ export const styles = StyleSheet.create({
       width: Dimensions.get('window').width,
       height: Dimensions.get('window').height,
     },
+    avatarContainer: {
+        position: 'absolute',
+        top: -60,
+        alignSelf: 'center',
+        width: 120,
+        height: 120,
+        backgroundColor: '#f6f6f6',
+        borderRadius: 16,
+    },
+    avatar: {
+        width: 120,
+        height: 120,
+    },
+    btnAddAvatar: {
+        position: 'absolute',
+        bottom: 10,
+        right: -12.5,
+        alignItems: 'center',
+        alignContent: 'center',
+    },
+    btnAddAvatarLoad: {
+        position: 'absolute',
+        bottom: 14,
+        right: -12.5,
+        alignItems: 'center',
+        alignContent: 'center',
+        transform: [{ rotate: '45deg' }],
+      },
     form: {
       paddingHorizontal: 16,
       width: '100%',
@@ -29,7 +57,7 @@ export const styles = StyleSheet.create({
         fontSize: 30,
         color: '#212121',
         lineHeight: 35,
-        marginTop: 32,
+        marginTop: 92,
         marginBottom: 32,
     },
       input: {
