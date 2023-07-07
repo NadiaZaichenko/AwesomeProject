@@ -15,24 +15,27 @@ const LoginScreen = () => {
   const [showBoard, setShowBoard] = useState(false);
   
   useEffect(() => {
-    const boardIsShow = Keyboard.addListener('keyboardWillShow', () => { 
-      setShowBoard(true);
-    });
-    const boardIsHide =  Keyboard.addListener('keyboardWillHide', () => {
-      setShowBoard(false);
-    });
-     return () => {
-        boardIsShow.removeEventListener();
-        boardIsHide.removeEventListener();
-     } 
+    console.log(Keyboard)
+    // const boardIsShow = Keyboard.addEventListener('keyboardWillShow', () => { 
+    //   setShowBoard(true);
+    //   // console.log(showBoard);
+    // });
+    // const boardIsHide =  Keyboard.addEventListener('keyboardWillHide', () => {
+    //   setShowBoard(false);
+    //   // console.log(showBoard);
+    // });
+    //  return () => {
+    //     boardIsShow.removeEventListener();
+    //     boardIsHide.removeEventListener();
+    //  } 
   }, []);
 
   function submitForm (){
     Keyboard.dismiss(); 
-    console.log(state);
-    console.log(showBoard);
     setState(initialState);
   }
+    console.log(state);
+    console.log(showBoard);
   // const [fontsLoaded] = useFonts({
   //   'Roboto-Bold': require('../assets/fonts/RobotoCondensed-Bold.ttf'),
   //   'Roboto-Regular': require('../assets/fonts/RobotoCondensed-Regular.ttf')
