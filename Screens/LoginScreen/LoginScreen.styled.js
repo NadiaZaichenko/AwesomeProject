@@ -97,4 +97,8 @@ export const styles = StyleSheet.create({
       linkTextUnderline: {
         textDecorationLine: 'underline',
       },
+      errorText: {
+        fontSize: 14,
+        color: '#ff6c00',
+      }
 })
