@@ -3,25 +3,60 @@ import { StyleSheet } from "react-native"
 export const styles =StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: "#FFFFFF",
-       
+          backgroundColor: '#fff',
     },
     title: {
+        fontFamily: "Roboto-Bold",
         fontWeight: 500,
-        lineHight: 22,
+        lineHeight: 22,
         fontSize: 17,
-        color: "#000",
-        paddingLeft: 49,
-        paddingRight: 50,
-        paddingTop: 11,
-        paddingBottom: 11,
+        color: "#212121",
+        paddingLeft: 135,
+        paddingTop: 15,
     },
     div: {
-        flex: 2,
-        marginTop: 30,
-        justifyContent: 'flex-start',
-        alignItems: 'center',
-        // borderColor: "#0000004D",
-        border: "5px solid #0000004D",
-    }
+        display: "flex",
+        flexDirection: "row",
+        justifyContent: "center",
+        alignItems: "center",
+        height: 90,
+        width: "100%",
+        borderBottomWidth: 1,
+        borderColor: "#BDBDBD",
+    }, 
+    logOut: {
+        paddingTop: 15,
+        marginLeft: 100,
+    },
+    user: {
+        width: 171,
+        height: 60,
+        marginTop: 20,
+        flexDirection: "row",
+        paddingLeft: 16,
+        marginTop: 32,
+        alignItems: "center",
+    },
+    avatar:{
+        width: 60,
+        height:60,
+        borderRadius: 16,
+    },
+    inform:{
+        paddingLeft: 8,
+    },
+    name:{
+        color: "#212121",
+        fontFamily: "Roboto-Regular",
+        fontSize: 13,
+        // fontStyle: normal;
+        fontWeight: 700,
+        // lineHeight: "normal",
+    },
+    email: {
+      fontSize: 11,
+      fontWeight: 400,
+      lineHeight: 12.89,
+      color: "#212121CC",
+    },
 })

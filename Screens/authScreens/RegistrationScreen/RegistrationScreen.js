@@ -6,7 +6,7 @@ import { useFonts } from 'expo-font';
 import * as Font from 'expo-font';
 import { Controller, useForm } from 'react-hook-form';
 
-const RegistrationScreen = () => {
+const RegistrationScreen = ({ navigation }) => {
   // const [name, setName] = useState('');
   // const [email, setEmail] = useState('');
   // const [password, setPassword] = useState('');
@@ -44,8 +44,8 @@ const RegistrationScreen = () => {
     reset();
   }
   const [fontsLoaded] = useFonts({
-    'Roboto-Bold': require('../../../assets/fonts/RobotoCondensed-Bold.ttf'),
-    'Roboto-Regular': require('../../../assets/fonts/RobotoCondensed-Regular.ttf')
+    'Roboto-Bold': require('../../../assets/fonts/Roboto-Bold.ttf'),
+    'Roboto-Regular': require('../../../assets/fonts/Roboto-Regular.ttf')
   });
 
   if (!fontsLoaded) {
@@ -147,7 +147,7 @@ const RegistrationScreen = () => {
                    <Text style={styles.buttonText}>Зареєструватися</Text>
                 </TouchableOpacity>
 
-                <TouchableOpacity style={styles.link}>
+                <TouchableOpacity style={styles.link} onPress={() => navigation.navigate('Login')}>
                     <Text style={styles.linkText}>Вже є акаунт? <Text style={styles.linkTextUnderline}>Увійти</Text>
                     </Text>
                 </TouchableOpacity>

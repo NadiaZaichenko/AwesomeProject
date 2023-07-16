@@ -5,7 +5,7 @@ import * as Font from 'expo-font';
 import {styles} from './LoginScreen.styled'
 import { useForm, Controller } from 'react-hook-form';
 
-const LoginScreen = () => {
+const LoginScreen = ({ navigation }) => {
   const { control, handleSubmit, formState: { errors }, reset  } = useForm();
 
   const [isPasswordSecure, setIsPasswordSecure] = useState(true);
@@ -39,8 +39,8 @@ const LoginScreen = () => {
   };
 
   const [fontsLoaded] = useFonts({
-    'Roboto-Bold': require('../../../assets/fonts/RobotoCondensed-Bold.ttf'),
-    'Roboto-Regular': require('../../../assets/fonts/RobotoCondensed-Regular.ttf')
+    'Roboto-Bold': require('../../../assets/fonts/Roboto-Bold.ttf'),
+    'Roboto-Regular': require('../../../assets/fonts/Roboto-Regular.ttf')
   });
 
   if (!fontsLoaded) {
@@ -108,7 +108,7 @@ const LoginScreen = () => {
                   <TouchableOpacity activeOpacity={0.7} style={styles.registBtn} onPress={handleSubmit(onSubmit)}>
                     <Text style={styles.buttonText}>Увійти</Text>
                   </TouchableOpacity>
-                  <TouchableOpacity style={styles.link}>
+                  <TouchableOpacity style={styles.link} onPress={() => navigation.navigate('Registration')}>
                     <Text style={styles.linkText}>Немає акаунту? <Text style={styles.linkTextUnderline}>Зареєструватися</Text></Text>
                   </TouchableOpacity>
                 </View>
