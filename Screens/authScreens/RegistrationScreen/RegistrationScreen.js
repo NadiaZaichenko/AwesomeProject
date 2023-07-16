@@ -44,8 +44,8 @@ const RegistrationScreen = () => {
     reset();
   }
   const [fontsLoaded] = useFonts({
-    'Roboto-Bold': require('../../assets/fonts/RobotoCondensed-Bold.ttf'),
-    'Roboto-Regular': require('../../assets/fonts/RobotoCondensed-Regular.ttf')
+    'Roboto-Bold': require('../../../assets/fonts/RobotoCondensed-Bold.ttf'),
+    'Roboto-Regular': require('../../../assets/fonts/RobotoCondensed-Regular.ttf')
   });
 
   if (!fontsLoaded) {
@@ -58,7 +58,7 @@ const RegistrationScreen = () => {
 
         <View style={styles.container}>
 
-            <ImageBackground style={styles.image} source={require('../../assets/images/PhotoBG.jpg')}>
+            <ImageBackground style={styles.image} source={require('../../../assets/images/PhotoBG.jpg')}>
               
             <View style={{...styles.form, height: '67.61%', marginBottom: keyboardShown ? 116 : 0}}>
 

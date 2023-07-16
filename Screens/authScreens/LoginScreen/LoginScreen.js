@@ -39,8 +39,8 @@ const LoginScreen = () => {
   };
 
   const [fontsLoaded] = useFonts({
-    'Roboto-Bold': require('../../assets/fonts/RobotoCondensed-Bold.ttf'),
-    'Roboto-Regular': require('../../assets/fonts/RobotoCondensed-Regular.ttf')
+    'Roboto-Bold': require('../../../assets/fonts/RobotoCondensed-Bold.ttf'),
+    'Roboto-Regular': require('../../../assets/fonts/RobotoCondensed-Regular.ttf')
   });
 
   if (!fontsLoaded) {
@@ -50,7 +50,7 @@ const LoginScreen = () => {
   return (
     <TouchableWithoutFeedback onPress={handleHideBoard}>
       <View style={styles.container}>
-        <ImageBackground style={styles.image} source={require('../../assets/images/PhotoBG.jpg')}>
+        <ImageBackground style={styles.image} source={require('../../../assets/images/PhotoBG.jpg')}>
           <View style={{...styles.form, marginBottom: keyboardShown ? 32 : 0}}>
             <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : "height"} style={{width: '100%'}}>
               <Text style={styles.textTitle}>Увійти</Text>
