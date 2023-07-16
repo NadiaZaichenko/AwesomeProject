@@ -146,11 +146,12 @@ const RegistrationScreen = ({ navigation }) => {
                 <TouchableOpacity activeOpacity={0.7} style={styles.registBtn} onPress={handleSubmit(submitForm)}>
                    <Text style={styles.buttonText}>Зареєструватися</Text>
                 </TouchableOpacity>
-
-                <TouchableOpacity style={styles.link} onPress={() => navigation.navigate('Login')}>
-                    <Text style={styles.linkText}>Вже є акаунт? <Text style={styles.linkTextUnderline}>Увійти</Text>
-                    </Text>
-                </TouchableOpacity>
+                <View style={styles.navigate}>
+                  <Text style={styles.linkText}>Вже є акаунт?</Text>
+                  <TouchableOpacity onPress={() => navigation.navigate('Registration')}>
+                     <Text style={styles.linkTextUnderline}>Увійти</Text>
+                  </TouchableOpacity>
+                  </View>
               </View>
             )}
              </View>
@@ -159,5 +160,6 @@ const RegistrationScreen = ({ navigation }) => {
       </TouchableWithoutFeedback>  
      )  
 };
+
 
 export default RegistrationScreen;

@@ -86,11 +86,6 @@ export const styles = StyleSheet.create({
         color: '#1B4371',
         fontSize: 16,
       },
-      link: {
-        alignItems: 'center',
-    
-        marginTop: 16,
-      },
       linkText: {
         color: '#1B4371',
       },
@@ -100,5 +95,11 @@ export const styles = StyleSheet.create({
       errorText: {
         fontSize: 14,
         color: '#ff6c00',
+      },
+      navigate:{
+        justifyContent: 'center',
+        marginTop: 16,
+        display:"flex",
+        flexDirection: "row",
       }
 })

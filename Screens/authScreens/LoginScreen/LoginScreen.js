@@ -108,9 +108,12 @@ const LoginScreen = ({ navigation }) => {
                   <TouchableOpacity activeOpacity={0.7} style={styles.registBtn} onPress={handleSubmit(onSubmit)}>
                     <Text style={styles.buttonText}>Увійти</Text>
                   </TouchableOpacity>
-                  <TouchableOpacity style={styles.link} onPress={() => navigation.navigate('Registration')}>
-                    <Text style={styles.linkText}>Немає акаунту? <Text style={styles.linkTextUnderline}>Зареєструватися</Text></Text>
+                  <View style={styles.navigate}>
+                  <Text style={styles.linkText}>Немає акаунту?</Text>
+                  <TouchableOpacity onPress={() => navigation.navigate('Registration')}>
+                     <Text style={styles.linkTextUnderline}>Зареєструватися</Text>
                   </TouchableOpacity>
+                  </View>
                 </View>
               )}
             </KeyboardAvoidingView>

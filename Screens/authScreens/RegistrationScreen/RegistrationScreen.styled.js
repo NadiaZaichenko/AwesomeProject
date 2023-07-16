@@ -51,7 +51,7 @@ export const styles = StyleSheet.create({
       height: '60.22%',
     },
       textTitle: {
-        // fontFamily: 'Roboto-Bold',
+        fontFamily: 'Roboto-Bold',
         textAlign: 'center',
         fontWeight: 500,
         fontSize: 30,
@@ -128,5 +128,11 @@ export const styles = StyleSheet.create({
       errorText: {
         fontSize: 14,
         color: '#ff6c00',
+      },
+      navigate:{
+        justifyContent: 'center',
+        marginTop: 16,
+        display:"flex",
+        flexDirection: "row",
       }
 })
