@@ -4,10 +4,10 @@ import { Feather } from '@expo/vector-icons';
 import { useFonts } from 'expo-font';
 import * as Font from 'expo-font';
 
-const PostScreen = () => {
+const PostScreen = ({ navigation }) => {
     const [fontsLoaded] = useFonts({
-        'Roboto-Bold': require('../../assets/fonts/Roboto-Bold.ttf'),
-        'Roboto-Regular': require('../../assets/fonts/Roboto-Regular.ttf')
+        'Roboto-Bold': require('../../../assets/fonts/Roboto-Bold.ttf'),
+        'Roboto-Regular': require('../../../assets/fonts/Roboto-Regular.ttf')
       });
     
       if (!fontsLoaded) {
@@ -19,14 +19,14 @@ const PostScreen = () => {
         
         <View style={styles.div}>
             <Text style={styles.title}>Публікації</Text>
-            <TouchableOpacity style={styles.logOut}>
+            <TouchableOpacity onPress={() => navigation.navigate("Login")} style={styles.logOut}>
              <Feather name="log-out" size={24} color="#BDBDBD" />
         </TouchableOpacity>
         </View>
 
         <View style={styles.user}>
             <View style={styles.avatar} >
-                <Image source={require("../../assets/images/avatar.jpg")} ></Image>
+                <Image source={require("../../../assets/images/avatar.jpg")} ></Image>
             </View>
             <View style ={ styles.inform}>
                  <Text style={styles.name}>Natali Romanova</Text>

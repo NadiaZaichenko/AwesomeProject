@@ -105,7 +105,9 @@ const LoginScreen = ({ navigation }) => {
               </View>
               {!keyboardShown && (
                 <View>
-                  <TouchableOpacity activeOpacity={0.7} style={styles.registBtn} onPress={handleSubmit(onSubmit)}>
+                  <TouchableOpacity activeOpacity={0.7} style={styles.registBtn} 
+                  onPress={handleSubmit(onSubmit)}
+                  >
                     <Text style={styles.buttonText}>Увійти</Text>
                   </TouchableOpacity>
                   <View style={styles.navigate}>
