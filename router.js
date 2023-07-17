@@ -29,61 +29,43 @@ const useRoute = (isAuth) => {
     }
     return (
       <MainStack.Navigator 
-      screenOptions={() => ({
+      screenOptions={{
+        tabBarShowLabel: false,
         tabBarStyle: {
-          height: 64,
-          paddingTop: 10,
-          paddingBottom: 20,
-
-          alignItems: "stretch",
-          alignContent: 'center',
-          justifyContent: 'center',
+          height: 83,
+          paddingTop: 9,
+          paddingRight: 80,
+          paddingLeft: 80,
         },
-      })}
-      tabBarOptions={{
-        showLabel: false,
-        activeTintColor: '#212121',
-        inactiveTintColor: '#ff6c00',
-        // activeBackgroundColor: "#ff6c00",
-        // inActiveBackgroundColor: "#212121",
-      }}>
+        tabBarItemStyle: {
+          width: 70,
+          height: 40,
+          borderRadius: 20,
+        },
+        tabBarActiveBackgroundColor: "#FF6C00",
+      }}
+      backBehavior="history">
+
       <MainStack.Screen 
       options={{headerShown: false, 
-        // tabBarIconStyle: {{...styles.btnTab, borderRadius: 20,}},
-
-      tabBarIcon: ({focused, size, color}) => (<SimpleLineIcons name="grid" size={size} color={color} tabBarIconStyle />)}} 
+      tabBarIcon: ({ focused }) => (<SimpleLineIcons name="grid" size={24} color={focused ? "#FFF" : "rgba(33, 33, 33, 0.8)"}/>)}} 
       name="Posts" 
       component={PostScreen}/>
 
       <MainStack.Screen  
       options={{headerShown: false, 
-      tabBarIcon: ({focused, size, color}) => (<AntDesign name="plus" size={size} color={color} />) }} 
+      tabBarIcon: ({focused}) => (<AntDesign name="plus" size={24} color={focused ? "#FFF" : "rgba(33, 33, 33, 0.8)"} />) }} 
       name="Create"
       component={CreatePostScreen}/>
 
       <MainStack.Screen 
       options={{headerShown: false, 
-      tabBarIcon: ({focused, size, color}) => (<Feather name="user" size={size} color={color} />)}} 
+      tabBarIcon: ({focused }) => (<Feather name="user" size={24} color={focused ? "#FFF" : "rgba(33, 33, 33, 0.8)"} />)}} 
       name="Profile" 
       component={ProfileScreen}/>
      </MainStack.Navigator>
     )
   }
-
-
-const styles = StyleSheet.create({
-    btnTab: {
-        alignSelf: 'center',
-        marginRight: 30,
-        width: 40,
-        height: 40,
-        paddingVertical: 8,
-        paddingHorizontal: 8,
-        backgroundColor: '#ffffff',
-        borderRadius: 20,
-      },
-
-})
 
   export default useRoute;
 
