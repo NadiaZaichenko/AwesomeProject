@@ -16,13 +16,10 @@ const PostScreen = ({ navigation }) => {
  return (
     <TouchableWithoutFeedback>
     <View style={styles.container}>
-        
+{/*         
         <View style={styles.div}>
             <Text style={styles.title}>Публікації</Text>
-            <TouchableOpacity onPress={() => navigation.navigate("Login")} style={styles.logOut}>
-             <Feather name="log-out" size={24} color="#BDBDBD" />
-        </TouchableOpacity>
-        </View>
+        </View> */}
 
         <View style={styles.user}>
             <View style={styles.avatar} >

@@ -1,5 +1,5 @@
 import React,  { useState, useEffect} from 'react';
-import { View, Image, TouchableOpacity, StyleSheet, Text, TextInput, ImageBackground, KeyboardAvoidingView, TouchableWithoutFeedback, Keyboard} from 'react-native';
+import { View, Image, TouchableOpacity, Text, TextInput, ImageBackground, KeyboardAvoidingView, TouchableWithoutFeedback, Keyboard} from 'react-native';
 import { styles } from './RegistrationScreen.styled';
 import { AntDesign } from '@expo/vector-icons'; 
 import { useFonts } from 'expo-font';
@@ -7,9 +7,6 @@ import * as Font from 'expo-font';
 import { Controller, useForm } from 'react-hook-form';
 
 const RegistrationScreen = ({ navigation }) => {
-  // const [name, setName] = useState('');
-  // const [email, setEmail] = useState('');
-  // const [password, setPassword] = useState('');
   const [isPasswordSecure, setIsPasswordSecure] = useState(true); 
   const [isAvatar, setIsAvatar] = useState(null);
   const [keyboardShown, setKeyboardShown] = useState(false);
@@ -40,6 +37,7 @@ const RegistrationScreen = ({ navigation }) => {
 
   function submitForm (data){
     console.log(data)
+    navigation.navigate('Home', {user: { email, password }})
     handleHideBoard();
     reset();
   }
@@ -148,7 +146,7 @@ const RegistrationScreen = ({ navigation }) => {
                 </TouchableOpacity>
                 <View style={styles.navigate}>
                   <Text style={styles.linkText}>Вже є акаунт?</Text>
-                  <TouchableOpacity onPress={() => navigation.navigate('Registration')}>
+                  <TouchableOpacity onPress={() => navigation.navigate('Login')}>
                      <Text style={styles.linkTextUnderline}>Увійти</Text>
                   </TouchableOpacity>
                   </View>

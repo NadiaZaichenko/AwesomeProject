@@ -11,7 +11,7 @@ export const styles =StyleSheet.create({
         lineHeight: 22,
         fontSize: 17,
         color: "#212121",
-        paddingLeft: 135,
+        // paddingLeft: 135,
         paddingTop: 15,
     },
     div: {
@@ -24,10 +24,10 @@ export const styles =StyleSheet.create({
         borderBottomWidth: 1,
         borderColor: "#BDBDBD",
     }, 
-    logOut: {
-        paddingTop: 15,
-        marginLeft: 100,
-    },
+    // logOut: {
+    //     paddingTop: 15,
+    //     // marginLeft: 100,
+    // },
     user: {
         width: 171,
         height: 60,

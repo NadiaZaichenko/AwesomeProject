@@ -4,9 +4,11 @@ import { unloadAllAsync, useFonts } from 'expo-font';
 import * as Font from 'expo-font';
 import {styles} from './LoginScreen.styled'
 import { useForm, Controller } from 'react-hook-form';
+// import { useNavigation } from '@react-navigation/native';
 
-const LoginScreen = ({ navigation }) => {
+const LoginScreen = ({navigation}) => {
   const { control, handleSubmit, formState: { errors }, reset  } = useForm();
+  // const navigation = useNavigation();
 
   const [isPasswordSecure, setIsPasswordSecure] = useState(true);
   const [keyboardShown, setKeyboardShown] = useState(false);
@@ -35,6 +37,7 @@ const LoginScreen = ({ navigation }) => {
   const onSubmit = (data) => {
     console.log(data);
     handleHideBoard();
+    navigation.navigate("Home", { user: data})
     reset()
   };
 
