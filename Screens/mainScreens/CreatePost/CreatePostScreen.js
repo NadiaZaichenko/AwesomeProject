@@ -17,9 +17,9 @@ const CreatePostScreen = () => {
     const todoPhoto = async () => {
         if (camera) {
             try {
-              const {  uri} = await camera.takePictureAsync(); 
+              const { uri } = await camera.takePictureAsync(); 
               setPhoto(uri);
-              console.log("photo", photo);
+              console.log(uri);
             } catch (error) {
               console.log('Error > ', error.message);
             }
