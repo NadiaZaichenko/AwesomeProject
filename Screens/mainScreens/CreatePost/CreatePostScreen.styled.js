@@ -7,7 +7,7 @@ export const styles = StyleSheet.create({
         paddingLeft: 16, 
         paddingRight: 16,
         display: "flex",
-        justifyContent: "center",
+        // justifyContent: "center",
         alignItems: "center",
     },
     titleContant: {
@@ -15,11 +15,17 @@ export const styles = StyleSheet.create({
         marginTop: 8,
     },
     title: {
-        // marginLeft: -160,
         fontWeight: 400,
         fontSize: 16,
         lineHeight: 18.75,
         color: "#BDBDBD",
+    },
+    photoContainer: {
+        position: "absolute",
+        top: 10,
+        left: 10,
+        borderWidth: 1,
+        borderColor: "#FFF",
     },
     content: {
         width: "100%",
@@ -43,11 +49,11 @@ export const styles = StyleSheet.create({
         alignItems: "center",
     },
     contentName: {
-        marginTop:32,
+        marginTop: 16,
         height: 50,
         width: "100%",
         borderBottomWidth: 1,
-        bordeColor: "#E8E8E8",
+        bordeColor: "#BDBDBD",
     },
     input: {
         fontSize: 16,
@@ -61,15 +67,11 @@ export const styles = StyleSheet.create({
         height: 50,
         width: "100%",
         borderBottomWidth: 1,
-        bordeColor: "#E8E8E8",
+        bordeColor: "#BDBDBD",
         display: "flex",
         flexDirection: "row",
         justifyContent: "flex-start",
         alignItems: 'center',
-    },
-    btnView: {
-    //    marginLeft: 10,
-    //    marginRight: 10,
     },
     btnContainer: {
         marginTop: 32,
@@ -80,11 +82,9 @@ export const styles = StyleSheet.create({
         height: 50,
         backgroundColor: "#FF6C00",
         borderRadius: 25,
-        // marginLeft: "auto",
-        // marginRight: "auto",
     },
     btnText: {
-
+        color: "#fff",
     },
     btnTrash: {
         alignSelf: 'center',
@@ -98,7 +98,6 @@ export const styles = StyleSheet.create({
     
         backgroundColor: '#f6f6f6',
         borderRadius: 20,
-        // backgroundColor: props.accessibilityState.selected ? '#f6f6f6' : '#ff6c00',
       },
 
 })

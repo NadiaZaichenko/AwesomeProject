@@ -50,6 +50,6 @@ export const styles =StyleSheet.create({
       fontSize: 11,
       fontWeight: 400,
       lineHeight: 12.89,
-      color: "#212121CC",
+      color: "#212121",
     },
 })

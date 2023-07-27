@@ -9,9 +9,12 @@ export default function App() {
   // const routing = useRoute(true)
   const Part = createStackNavigator();
   return <NavigationContainer>
-    <Part.Navigator initialRouteName='Login' screenOptions={{headerShown: false}}>
-      <Part.Screen name="Login" component={LoginScreen}/>
-      <Part.Screen name="Registration" component={RegistrationScreen}/>
+    <Part.Navigator 
+    // initialRouteName='Login'
+     screenOptions={{headerShown: false}}
+     >
+      {/* <Part.Screen name="Login" component={LoginScreen}/> */}
+      {/* <Part.Screen name="Registration" component={RegistrationScreen}/> */}
       <Part.Screen name="Home" component={Home}/>
     </Part.Navigator>
   </NavigationContainer>
