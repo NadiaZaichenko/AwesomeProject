@@ -9,7 +9,7 @@ import { Camera } from "expo-camera";
 
 
 
-const CreatePostScreen = () => {
+const CreatePostScreen = ({navigation}) => {
     const [camera, setCamera] = useState(null);
     const [photo, setPhoto] = useState("");
    
@@ -25,6 +25,10 @@ const CreatePostScreen = () => {
             }
           }
     };
+
+    const sendPhoto = () => {
+        navigation.navigate("Публікації", {photo})
+    }
 
     return (
         <View style={styles.container}>
@@ -53,7 +57,7 @@ const CreatePostScreen = () => {
             </View>
 
             <View stylele={styles.btnView}>
-                <TouchableOpacity style={styles.btnContainer}>
+                <TouchableOpacity style={styles.btnContainer} onPress={sendPhoto}>
                     <Text style={styles.btnText}>Опублікувати</Text>
                 </TouchableOpacity>
             </View>
