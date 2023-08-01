@@ -17,12 +17,12 @@ const PostScreen = ({ navigation, route }) => {
 
       const [posts, setPosts] = useState([]);
 
-      useEffect(() => {
-        if(route.params) {
-            setPosts((prevState) => [...prevState, route.params]) 
-        }
-      }, [route.params]);
-      console.log(posts);
+    //   useEffect(() => {
+    //     if(route.params) {
+    //         setPosts((prevState) => [...prevState, route.params]) 
+    //     }
+    //   }, [route.params]);
+    //   console.log(posts);
 
 
  return (
@@ -43,10 +43,10 @@ const PostScreen = ({ navigation, route }) => {
 
             </View>
             <View>
-                <FlatList data={posts} keyExtractor={(index) => index.toString()} renderItem={({item}) => ( 
+                {/* <FlatList data={posts} keyExtractor={(index) => index.toString()} renderItem={({item}) => ( 
                 <View>
                     <Image source={{uri: item.photo}} />
-                </View> )} />
+                </View> )} /> */}
 
             </View>
            
