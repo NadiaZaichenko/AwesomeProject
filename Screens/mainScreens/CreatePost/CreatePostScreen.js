@@ -1,9 +1,10 @@
-import React , {useState} from "react";
+import React , {useState, useEffect} from "react";
 import {View, Text, TextInput, TouchableOpacity, Image} from "react-native";
 import { styles } from "./CreatePostScreen.styled";
 import { FontAwesome } from '@expo/vector-icons';
 import { Feather } from '@expo/vector-icons';
 import { Camera } from "expo-camera";
+import * as Location from 'expo-location';
 // import * as MediaLibrary from 'expo-media-library';
 
 
@@ -12,12 +13,15 @@ import { Camera } from "expo-camera";
 const CreatePostScreen = ({navigation}) => {
     const [camera, setCamera] = useState(null);
     const [photo, setPhoto] = useState("");
+    // const [location, setLocation] = useState(null)
    
 
     const todoPhoto = async () => {
         if (camera) {
             try {
               const { uri } = await camera.takePictureAsync(); 
+              const location = await Location.getCurrentPositionAsync();
+              console.log(location);
               setPhoto(uri);
               console.log(uri);
             } catch (error) {
@@ -27,8 +31,22 @@ const CreatePostScreen = ({navigation}) => {
     };
 
     const sendPhoto = () => {
-        navigation.navigate("Публікації", {photo})
+        navigation.navigate("Публікації", { photo })
     }
+
+    // useEffect(() => {
+    //     (async () => {
+          
+    //       let { status } = await Location.requestForegroundPermissionsAsync();
+    //       if (status !== 'granted') {
+    //         setErrorMsg('Permission to access location was denied');
+    //         return;
+    //       }
+    
+    //       let location = await Location.getCurrentPositionAsync({});
+    //       setLocation(location);
+    //     })();
+    //   }, []);
 
     return (
         <View style={styles.container}>

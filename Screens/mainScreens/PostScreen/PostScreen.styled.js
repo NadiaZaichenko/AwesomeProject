@@ -3,7 +3,7 @@ import { StyleSheet } from "react-native"
 export const styles =StyleSheet.create({
     container: {
         flex: 1,
-          backgroundColor: '#fff',
+        backgroundColor: '#fff',
     },
     title: {
         fontFamily: "Roboto-Bold",
@@ -17,7 +17,7 @@ export const styles =StyleSheet.create({
         display: "flex",
         flexDirection: "row",
         justifyContent: "center",
-        alignItems: "center",
+        // alignItems: "center",
         height: 90,
         width: "100%",
         borderBottomWidth: 1,
@@ -52,4 +52,16 @@ export const styles =StyleSheet.create({
       lineHeight: 12.89,
       color: "#212121",
     },
+    photo: {
+        marginHorizontal: 10,
+        height: 200,
+        marginTop: 16,
+        backgroundColor: "#000",
+    },
+    arrowLeft: {
+        marginLeft: 16,
+        marginRight: 76,
+        paddingHorizontal: 16,
+        paddingVertical: 10,
+      },
 })
