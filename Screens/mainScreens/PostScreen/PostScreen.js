@@ -1,19 +1,52 @@
 import { createStackNavigator } from '@react-navigation/stack';
-import { Text, View } from 'react-native';
+import { View, TouchableOpacity } from 'react-native';
 import NestedPostScreen from '../../DefaultPostScreen/NestedPostScreen/NastedPostScreen';
+import { SimpleLineIcons } from '@expo/vector-icons';
+import { AntDesign } from '@expo/vector-icons';
+import { Feather } from '@expo/vector-icons';
+
 import CommentScreen from '../../DefaultPostScreen/CommentScreen/CommentScreen';
 import MapScreen from '../../DefaultPostScreen/MapScreen/MapScreen';
 import { styles } from './PostScreen.styled';
-import { StyleSheet } from 'react-native';
-import { AntDesign } from '@expo/vector-icons';
-// import SvgArrowLeft from '../../assets/svg/SvgArrowLeft';
 
 const NestedScreen = createStackNavigator();
 
 const PostScreen = ({ navigation }) => {
   return (
-    <NestedScreen.Navigator initialRouteName="NestedPostScreen" screenOptions={{ headerShown: false }}>
-      <NestedScreen.Screen name="DefaultPosts" component={NestedPostScreen} />
+    <NestedScreen.Navigator initialRouteName="NestedPostScreen" 
+    >
+      <NestedScreen.Screen name="NestedPostScreen" component={NestedPostScreen} 
+      options={{ 
+      title: "Публікації",
+      headerRight: ({focused}) => (
+     <View style={{
+      display: "flex",
+      paddingRight: 10,
+      flexDirection: "row",
+      justifyContent: "flex-end",
+      alignItems: "center",
+      height: 57,
+      width: "300%",
+      borderBottomWidth: 1,
+      borderColor: "#BDBDBD",}}>
+       <TouchableOpacity
+        onPress={() => navigation.navigate("Login")}
+      >
+        <Feather name="log-out" size={24} color={focused ? "rgba(33, 33, 33, 0.8)" : "#BDBDBD"} />
+      </TouchableOpacity>
+
+     </View>
+    ),
+    headerTitleAlign: "center",
+    headerTitleStyle: {
+      fontSize: 17,
+      lineHeight: 22,
+      color: "#212121",
+    },
+
+    tabBarIcon: ({ focused }) => (<SimpleLineIcons name="grid" size={24} color={focused ? "#FFF" : "#212121"}/>
+    )}}  
+      />
       <NestedScreen.Screen
         name="Comments"
         component={CommentScreen}
@@ -24,7 +57,7 @@ const PostScreen = ({ navigation }) => {
             <AntDesign name="arrowleft" size={24} 
             onPress={() => navigation.goBack()}
             title="Return back"
-            color="#fff"
+            color="#000"
             style={{
               ...styles.arrowLeft,
               marginRight: 90,
@@ -43,7 +76,7 @@ const PostScreen = ({ navigation }) => {
             <AntDesign name="arrowleft" size={24} 
               onPress={() => navigation.goBack()}
               title="Return back"
-              color="#fff"
+              color="#000"
               style={{
                 ...styles.arrowLeft,
                 marginRight: 90,
@@ -59,7 +92,7 @@ const PostScreen = ({ navigation }) => {
 export default PostScreen;
 
 const screenOptions = {
-  headerShown: true,
+  // headerShown: true,
   headerStyle: {
     borderBottomWidth: 0.5,
     borderBottomColor: 'rgba(0, 0, 0, 0.3)',
@@ -76,62 +109,3 @@ const screenOptions = {
     textAlign: 'center',
   },
 };
-
-
-// import { View, Text, TouchableOpacity, TouchableWithoutFeedback,Image, FlatList } from "react-native";
-// import { useState,useEffect } from "react";
-// import { styles } from "./PostScreen.styled";
-// // import { Feather } from '@expo/vector-icons'; 
-// import { useFonts } from 'expo-font';
-// // import * as Font from 'expo-font';
-
-// const PostScreen = ({ navigation, route }) => {
-//     // const [fontsLoaded] = useFonts({
-//     //     'Roboto-Bold': require('../../../assets/fonts/Roboto-Bold.ttf'),
-//     //     'Roboto-Regular': require('../../../assets/fonts/Roboto-Regular.ttf')
-//     //   });
-    
-//     //   if (!fontsLoaded) {
-//     //     return null;
-//     //   };
-
-//       const [posts, setPosts] = useState([]);
-    
-//       useEffect(() => {
-//         if (!route.params) return;
-    
-//         setPosts(prevState => [...prevState, route.params.photo]);
-//       }, [route.params]);
-
-//       console.log("posts", posts)
-
-
-//  return (
-//     <View style={styles.container}>
-
-//         {/* <View style={styles.user}> */}
-//             {/* <View style={styles.avatar} >
-//                 <Image source={require("../../../assets/images/avatar.jpg")} ></Image>
-//             </View>
-//             <View style ={ styles.inform}>
-//                  <Text style={styles.name}>Natali Romanova</Text>
-//             <Text style={styles.email}>email@example.com</Text>
-
-//             </View> */}
-//             <FlatList
-//         // style={styles.postsWrapper}
-//         data={posts}
-//         keyExtractor={(item, idx) => idx.toString()}
-//         renderItem={({ item }) => (
-//             <View>
-//                 <Image style={styles.photo} source={{uri: item.photo}}/>
-//             </View>
-//         )}
-//       />
-//       <View style={styles.navTabs}></View> 
-//         </View>
-//     // </View>
-//  )
-// } 
-
-// export default PostScreen;

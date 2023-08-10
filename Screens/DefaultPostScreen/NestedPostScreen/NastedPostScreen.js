@@ -8,12 +8,13 @@ import PostsItem from '../../../component/PostItem/PostItem';
 const NestedPostScreen = ({ route }) => {
   const [posts, setPosts] = useState([
     {
-      id: 'ksdlflsdnfsldjnfdjfsjdkfn',
+      // id: 'catty',
       postImg:
-        'file:///data/user/0/host.exp.exponent/cache/ExperienceData/%2540anonymous%252Fgoit-react-native-hw-05-dbed3e8b-5429-4e6e-a6ba-fefe43283569/Camera/1609f830-6073-4560-8596-6f26f450b3a3.jpg',
-      postName: 'олл',
+        'file:///data/user/0/host.exp.exponent/cache/ExperienceData/%2540anonymous%252FAwesomeProject-71fbbe2e-6fda-4603-96ba-05ca137c0f17/Camera/5421a1be-1b95-42a6-94f6-5e0afc2cf8dd.jpg',
+      postName: 'nature',
       postAddress: 'Ukraine',
-      postLocation: { latitude: 48.383022, longitude: 31.1828699 },
+      postLocation: {  latitude: 37.4220936,
+        longitude: -122.083922, },
     },
   ]);
 
@@ -26,7 +27,7 @@ const NestedPostScreen = ({ route }) => {
   return (
     <View style={styles.container}>
       <View style={styles.avatarWrapper}>
-        <Image style={styles.avatarImg} />
+        <Image style={styles.avatarImg} source={require("../../../assets/images/avatar.jpg")}/>
         <View>
           <Text style={styles.avatarName}>Natali Romanova</Text>
           <Text style={styles.avatarEmail}>email@example.com</Text>

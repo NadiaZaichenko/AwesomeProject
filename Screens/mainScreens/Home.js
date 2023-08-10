@@ -34,6 +34,7 @@ const Home = ({navigation}) => {
     return (
     <MainStack.Navigator 
     screenOptions={{
+    
       tabBarShowLabel: false,
       tabBarStyle: {
         height: 83,
@@ -55,6 +56,8 @@ const Home = ({navigation}) => {
     name="Публікації"
     component={PostScreen}
     options={{ 
+        headerShown: false,
+      title: "Публікації",
       headerRight: ({focused}) => (
      <View style={{
       display: "flex",
@@ -109,7 +112,7 @@ const Home = ({navigation}) => {
    ),
   tabBarIcon: ({ focused }) => {
     return focused ? <Feather name="trash-2" 
-   color={'#fff'} size={24} /> : <AntDesign name="plus" color={"#212121"} size={24}/>;
+   color={'#dbdbdb'} size={24} /> : <AntDesign name="plus" color={"#212121"} size={24}/>;
   },
   headerTitleAlign: "center",
   headerTitleStyle: {

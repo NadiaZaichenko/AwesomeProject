@@ -1,103 +1,153 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet, Dimensions, } from "react-native";
 
 export const styles = StyleSheet.create({
     container: {
-        flex: 1,
-        backgroundColor: "#fff",
-        paddingLeft: 16, 
-        paddingRight: 16,
-        display: "flex",
-        // justifyContent: "center",
-        alignItems: "center",
+      flex: 1,
+  
+      paddingHorizontal: 16,
+      paddingVertical: 32,
+  
+      backgroundColor: '#fff',
+  
+      resizeMode: 'cover',
+      width: Dimensions.get('window').width,
+      height: Dimensions.get('window').height,
     },
-    titleContant: {
-        marginLeft: -195,
-        marginTop: 8,
+  
+    loadWrapper: {
+      marginBottom: 32,
     },
-    title: {
-        fontWeight: 400,
-        fontSize: 16,
-        lineHeight: 18.75,
-        color: "#BDBDBD",
+    postImgWrapper: {
+      position: 'relative',
+      alignItems: 'center',
+      justifyContent: 'center',
+  
+      height: 240,
+      maxHeight: 240,
+      maxWidth: 342,
+  
+      marginBottom: 8,
+  
+      backgroundColor: '#F6F6F6',
+      border: '1px solid #E8E8E8',
+      borderRadius: 8,
+      overflow: 'hidden',
     },
-    photoContainer: {
-        position: "absolute",
-        top: 10,
-        left: 10,
-        borderWidth: 1,
-        borderColor: "#FFF",
+    camera: {
+      alignItems: 'center',
+      justifyContent: 'center',
+  
+      height: '100%',
+      width: '100%',
     },
-    content: {
-        width: "100%",
-        height: 240,
-        backgroundColor: "#F6F6F6",
-        marginTop: 32,
-        borderWidth: 1, 
-        borderRadius: 8,
-        borderColor: "#E8E8E8",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
+  
+    bgImage: {
+      position: 'absolute',
+      top: 0,
+      left: 0,
+      // zIndex: 99,
+      flex: 1,
+      height: 240,
+      maxHeight: 240,
+      width: '100%',
+      maxWidth: 342,
+      backgroundColor: '#000',
     },
-    cameraIcon: {
-        width: 60,
-        height: 60,
-        backgroundColor: "#FFFFFF",
-        borderRadius: 30,
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
+    loadBtn: {
+      alignItems: 'center',
+      alignContent: 'center',
+  
+      width: 60,
+      height: 60,
+  
+      padding: 18,
+  
+      color: '#bdbdbd',
+      backgroundColor: '#ffffff',
+      borderRadius: 50,
     },
-    contentName: {
-        marginTop: 16,
-        height: 50,
-        width: "100%",
-        borderBottomWidth: 1,
-        bordeColor: "#BDBDBD",
+    loadWrapperText: {
+      fontFamily: 'Roboto',
+      fontStyle: 'normal',
+      fontWeight: 400,
+      fontSize: 16,
+      lineHeight: 19,
+  
+      color: '#BDBDBD',
+    },
+  
+    locationInputWrapper: {
+      position: 'relative',
+      height: 50,
+      paddingVertical: 16,
+  
+      alignContent: 'center',
+  
+      color: '#212121',
+      backgroundColor: '#ffffff',
+  
+      borderBottomWidth: 1,
+      borderColor: '#e8e8e8',
     },
     input: {
-        fontSize: 16,
-        lineHeight: 18.75,
-        color: "#BDBDBD",
-        paddingBottom: 15,
-        paddingTop: 16,
+      height: 50,
+      fontSize: 16,
+      paddingVertical: 16,
+      marginBottom: 16,
+  
+      color: '#212121',
+      backgroundColor: '#ffffff',
+  
+      borderBottomWidth: 1,
+      borderColor: '#e8e8e8',
     },
-    contentMap: {
-        marginTop: 16,
-        height: 50,
-        width: "100%",
-        borderBottomWidth: 1,
-        bordeColor: "#BDBDBD",
-        display: "flex",
-        flexDirection: "row",
-        justifyContent: "flex-start",
-        alignItems: 'center',
+    inputLocation: {
+      fontSize: 16,
+  
+      marginLeft: 28,
+  
+      color: '#212121',
+      backgroundColor: '#ffffff',
     },
-    btnContainer: {
-        marginTop: 32,
-        display: "flex",
-        justifyContent: 'center',
-        alignItems: "center",
-        width: 343,
-        height: 50,
-        backgroundColor: "#FF6C00",
-        borderRadius: 25,
+    btnLoaction: {
+      position: 'absolute',
+      left: 0,
+      bottom: 16,
+      alignSelf: 'center',
+  
+      backgroundColor: 'transparent',
+    },
+    btn: {
+      marginTop: 32,
+      marginBottom: 120,
+  
+      paddingVertical: 16,
+  
+      backgroundColor: '#f6f6f6',
+      borderRadius: 100,
     },
     btnText: {
-        color: "#fff",
+      fontFamily: 'Roboto',
+      fontStyle: 'normal',
+      fontWeight: 400,
+      fontSize: 16,
+  
+      textAlign: 'center',
+  
+      color: '#bdbdbd',
     },
     btnTrash: {
-        alignSelf: 'center',
-        alignItems: 'center',
-    
-        width: 70,
-        height: 40,
-    
-        paddingVertical: 8,
-        paddingHorizontal: 8,
-    
-        backgroundColor: '#f6f6f6',
-        borderRadius: 20,
-      },
-
-})
+      alignSelf: 'center',
+      alignItems: 'center',
+  
+      width: 70,
+      height: 40,
+  
+      paddingVertical: 8,
+      paddingHorizontal: 8,
+  
+      backgroundColor: '#f6f6f6',
+      borderRadius: 20,
+      // backgroundColor: props.accessibilityState.selected ? '#f6f6f6' : '#ff6c00',
+    },
+  });
