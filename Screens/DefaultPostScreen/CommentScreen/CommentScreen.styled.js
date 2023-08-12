@@ -26,7 +26,9 @@ export const styles = StyleSheet.create({
       maxHeight: 312,
       marginBottom: 28,
     },
-    inputCommentWrapper: {},
+    inputCommentWrapper: {
+      marginBottom: 16,
+    },
     commentInput: {
       position: 'relative',
       width: '100%',

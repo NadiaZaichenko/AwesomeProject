@@ -1,21 +1,26 @@
 import { createStackNavigator } from '@react-navigation/stack';
 import { View, TouchableOpacity } from 'react-native';
-import NestedPostScreen from '../../DefaultPostScreen/NestedPostScreen/NastedPostScreen';
+
 import { SimpleLineIcons } from '@expo/vector-icons';
 import { AntDesign } from '@expo/vector-icons';
 import { Feather } from '@expo/vector-icons';
 
+import NestedPostScreen from '../../DefaultPostScreen/NestedPostScreen/NastedPostScreen';
 import CommentScreen from '../../DefaultPostScreen/CommentScreen/CommentScreen';
 import MapScreen from '../../DefaultPostScreen/MapScreen/MapScreen';
+
 import { styles } from './PostScreen.styled';
 
 const NestedScreen = createStackNavigator();
 
-const PostScreen = ({ navigation }) => {
+const PostScreen = ({ navigation , route }) => {
+
   return (
     <NestedScreen.Navigator initialRouteName="NestedPostScreen" 
     >
-      <NestedScreen.Screen name="NestedPostScreen" component={NestedPostScreen} 
+      <NestedScreen.Screen
+       name="NestedPostScreen" 
+       component={NestedPostScreen} 
       options={{ 
       title: "Публікації",
       headerRight: ({focused}) => (
@@ -52,6 +57,7 @@ const PostScreen = ({ navigation }) => {
         component={CommentScreen}
         options={{
           ...screenOptions,
+          tabBarVisible: false,
           title: 'Коментарі',
           headerLeft: () => (
             <AntDesign name="arrowleft" size={24} 
@@ -92,7 +98,6 @@ const PostScreen = ({ navigation }) => {
 export default PostScreen;
 
 const screenOptions = {
-  // headerShown: true,
   headerStyle: {
     borderBottomWidth: 0.5,
     borderBottomColor: 'rgba(0, 0, 0, 0.3)',

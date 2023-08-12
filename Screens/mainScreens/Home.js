@@ -4,31 +4,22 @@ import PostScreen from './PostScreen/PostScreen';
 import {createBottomTabNavigator} from "@react-navigation/bottom-tabs";
 import { TouchableOpacity, View, Keyboard } from 'react-native';
 import { useState, useEffect } from 'react';
+import { getFocusedRouteNameFromRoute } from '@react-navigation/native';
 //add icon
 import { SimpleLineIcons } from '@expo/vector-icons';
 import { AntDesign } from '@expo/vector-icons';
 import { Feather } from '@expo/vector-icons';
 
 const Home = ({navigation}) => {
-  // const [keyboardShown, setKeyboardShown] = useState(false);
 
-  // useEffect(() => {
-  //   Keyboard.addListener('keyboardDidShow', handleKeyboardDidShow);
-  //   Keyboard.addListener('keyboardDidHide', handleKeyboardDidHide);
-  //   return () => {
-  //     Keyboard.removeListener('keyboardDidShow', handleKeyboardDidShow);
-  //     Keyboard.removeListener('keyboardDidHide', handleKeyboardDidHide);
-  //   };
-  // }, []);
+     const getTabBArVisibility = (route) => {
+       const routeName = getFocusedRouteNameFromRoute(route) ?? "Feed";
+       if(routeName === "Comments") {
+        return "none"
+       }
+       return "flex"
+    }
 
-  // const handleKeyboardDidShow = () => {
-  //   setKeyboardShown(true);
-  // };
-
-  // const handleKeyboardDidHide = () => {
-  //   setKeyboardShown(false);
-  // };
-    
     const MainStack = createBottomTabNavigator();
 
     return (
@@ -49,13 +40,19 @@ const Home = ({navigation}) => {
       },
       tabBarActiveBackgroundColor: "#FF6C00",
     }}
-    // backBehavior="history"
+    backBehavior="history"
     >
 
     <MainStack.Screen 
     name="Публікації"
     component={PostScreen}
-    options={{ 
+    options={({route}) => ({ 
+      tabBarStyle : {
+        display: getTabBArVisibility(route),
+        height: 83,
+        paddingTop: 25,
+        paddingRight: 70,
+        paddingLeft: 70,},
         headerShown: false,
       title: "Публікації",
       headerRight: ({focused}) => (
@@ -85,7 +82,7 @@ const Home = ({navigation}) => {
     },
 
     tabBarIcon: ({ focused }) => (<SimpleLineIcons name="grid" size={24} color={focused ? "#FFF" : "#212121"}/>
-    )}}  
+    )})}  
     />
 <MainStack.Screen 
   name="Створити публікацію"

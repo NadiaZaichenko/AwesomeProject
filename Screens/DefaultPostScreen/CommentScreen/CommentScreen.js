@@ -16,17 +16,17 @@ const CommentScreen = ({ navigation, route: { params } }) => {
     {
       autorAvatar: '',
       comment: 'Comment 1sknnn',
-      date: '09 червня, 2020 | 08:40',
+      date: '09 червня, 2023 | 08:40',
     },
     {
       autorAvatar: '',
       comment: 'Comment 2sknnn',
-      date: '09 червня, 2020 | 08:40',
+      date: '09 червня, 2023 | 08:40',
     },
     {
       autorAvatar: '',
       comment: 'Comment 3sknnn',
-      date: '09 червня, 2020 | 08:40',
+      date: '09 червня, 2023 | 08:40',
     },
   ]);
 
@@ -44,7 +44,7 @@ const CommentScreen = ({ navigation, route: { params } }) => {
     const data = {
       autorAvatar: '',
       comment: commentText,
-      date: '09 червня, 2020 | 08:40',
+      date: '09 червня, 2023 | 08:40',
     };
 
     setComment(prev => [...prev, data]);
@@ -82,7 +82,7 @@ const CommentScreen = ({ navigation, route: { params } }) => {
               onChangeText={setCommentText}
             />
             <TouchableOpacity style={styles.commentBtn} onPress={handleAddComment}>
-            <AntDesign name="arrowleft" size={24} color="#212121CC"/>
+            <AntDesign name="arrowup" size={22} color="#FFFFFF" />
             </TouchableOpacity>
           </View>
         </KeyboardAvoidingView>

@@ -1,15 +1,23 @@
 import React,  { useState, useEffect} from 'react';
 import { View, Image, TouchableOpacity, Text, TextInput, ImageBackground, KeyboardAvoidingView, TouchableWithoutFeedback, Keyboard} from 'react-native';
+import { useDispatch } from 'react-redux';
+
+import {authSignUpUser} from '../../../redux/auth/authOperation';
+
 import { styles } from './RegistrationScreen.styled';
+
 import { AntDesign } from '@expo/vector-icons'; 
 import { useFonts } from 'expo-font';
 import * as Font from 'expo-font';
+
 import { Controller, useForm } from 'react-hook-form';
 
 const RegistrationScreen = ({ navigation }) => {
   const [isPasswordSecure, setIsPasswordSecure] = useState(true); 
   const [isAvatar, setIsAvatar] = useState(null);
   const [keyboardShown, setKeyboardShown] = useState(false);
+
+  const dispatch = useDispatch();
 
   const { control, handleSubmit, reset, formState: {errors}} = useForm()
 
@@ -34,10 +42,10 @@ const RegistrationScreen = ({ navigation }) => {
     Keyboard.dismiss(); 
   };
  
-
-  function submitForm (data){
-    console.log(data)
-    navigation.navigate('Home', {user: { email, password }})
+  const submitForm = (data) => {
+    console.log("data", data);
+    dispatch(authSignUpUser(data));
+    navigation.navigate('Home')
     handleHideBoard();
     reset();
   }
@@ -89,9 +97,10 @@ const RegistrationScreen = ({ navigation }) => {
               )}
               />
 
-<Controller 
+              <Controller 
                 control={control}
                 name="email"
+                // value={field.value}
                 rules={{
                   required: { value: true, message: 'Адреса електронної пошти обов\'язкова' },
                   pattern: {

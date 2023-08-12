@@ -1,14 +1,17 @@
 import React, { useState, useEffect}from 'react';
 import { View, TouchableOpacity, Text, TextInput, ImageBackground, KeyboardAvoidingView, TouchableWithoutFeedback, Keyboard} from 'react-native';
-import { unloadAllAsync, useFonts } from 'expo-font';
+import {useFonts } from 'expo-font';
 import * as Font from 'expo-font';
 import {styles} from './LoginScreen.styled'
 import { useForm, Controller } from 'react-hook-form';
-// import { useNavigation } from '@react-navigation/native';
+import { useDispatch } from 'react-redux';
+import { authSignInUser } from '../../../redux/auth/authOperation';
+
 
 const LoginScreen = ({navigation}) => {
   const { control, handleSubmit, formState: { errors }, reset  } = useForm();
-  // const navigation = useNavigation();
+
+  const dispatch = useDispatch();
 
   const [isPasswordSecure, setIsPasswordSecure] = useState(true);
   const [keyboardShown, setKeyboardShown] = useState(false);
@@ -36,9 +39,10 @@ const LoginScreen = ({navigation}) => {
 
   const onSubmit = (data) => {
     console.log(data);
+    dispatch(authSignInUser(data))
     handleHideBoard();
-    navigation.navigate("Home", { user: data})
-    reset()
+    navigation.navigate("Home");
+    reset();
   };
 
   const [fontsLoaded] = useFonts({
