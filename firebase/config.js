@@ -2,14 +2,16 @@ import { initializeApp } from 'firebase/app';
 import { getAuth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 import { getStorage } from "firebase/storage";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const firebaseConfig = {
-  apiKey: "AIzaSyC3aqmIteGrnZ_y6z_8KnczstUB-6KKGn8",
-  authDomain: "expoproject-74957.firebaseapp.com",
-  projectId: "expoproject-74957",
-  storageBucket: "expoproject-74957.appspot.com",
-  messagingSenderId: "467146086659",
-  appId: "1:467146086659:web:61686205702a0d42997136"
+  apiKey: "AIzaSyCuF0pId9RJnWzG6jaMb2zvdoJbOwQngb4",
+  authDomain: "nativeproject-955c1.firebaseapp.com",
+  projectId: "nativeproject-955c1",
+  storageBucket: "nativeproject-955c1.appspot.com",
+  messagingSenderId: "322320753743",
+  appId: "1:322320753743:web:0b0e4c8e6a651d51f1763a",
+  measurementId: "G-MCNGHFVRCY"
 };
 
 export const app = initializeApp(firebaseConfig);

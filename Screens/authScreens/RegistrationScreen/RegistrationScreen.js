@@ -1,7 +1,6 @@
 import React,  { useState, useEffect} from 'react';
 import { View, Image, TouchableOpacity, Text, TextInput, ImageBackground, KeyboardAvoidingView, TouchableWithoutFeedback, Keyboard} from 'react-native';
-
-import { useDispatch,useSelector  } from 'react-redux';
+import { useDispatch,useSelector } from 'react-redux';
 import {authSignUpUser} from '../../../redux/auth/authOperation';
 
 import { styles } from './RegistrationScreen.styled';
@@ -48,11 +47,11 @@ const RegistrationScreen = ({ navigation }) => {
   const submitForm = (data) => {
     data.avatar = image;
     dispatch(authSignUpUser(data));
-    console.log("data", data);
-    if(!isLogin){
-     return alert("error")
-    }
-     navigation.navigate('Home')
+    console.log("data", data); 
+    // if(!isLogin){
+    //   return alert("error")
+    //  }
+    navigation.navigate('Home')
     handleHideBoard();
     reset();
   }
@@ -79,7 +78,7 @@ const RegistrationScreen = ({ navigation }) => {
             behavior={Platform.OS === "ios" ? "padding" : "height"} style={{width: '100%'}}
           >
             <View style={styles.avatarContainer}>
-              {image && (
+            {image && (
                 <Image style={styles.avatar} source={{uri: image}}/>
               )}
                 <TouchableOpacity onPress={() => pickAvatar(setImage)}>
@@ -109,6 +108,7 @@ const RegistrationScreen = ({ navigation }) => {
               <Controller 
                 control={control}
                 name="email"
+                // value={field.value}
                 rules={{
                   required: { value: true, message: 'Адреса електронної пошти обов\'язкова' },
                   pattern: {
