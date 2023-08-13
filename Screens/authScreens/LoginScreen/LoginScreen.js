@@ -38,10 +38,9 @@ const LoginScreen = ({navigation}) => {
   }
 
   const onSubmit = (data) => {
-    console.log(data);
     dispatch(authSignInUser(data))
     handleHideBoard();
-    navigation.navigate("Home");
+    navigation.navigate("Home", { user: {...data} });
     reset();
   };
 

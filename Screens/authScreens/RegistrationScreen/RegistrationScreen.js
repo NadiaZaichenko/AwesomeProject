@@ -1,10 +1,12 @@
 import React,  { useState, useEffect} from 'react';
 import { View, Image, TouchableOpacity, Text, TextInput, ImageBackground, KeyboardAvoidingView, TouchableWithoutFeedback, Keyboard} from 'react-native';
-import { useDispatch } from 'react-redux';
 
+import { useDispatch,useSelector  } from 'react-redux';
 import {authSignUpUser} from '../../../redux/auth/authOperation';
 
 import { styles } from './RegistrationScreen.styled';
+import {pickAvatar} from '../../../firebase/pickAvatar';
+import {selectIslogin} from '../../../redux/auth/authSelectors'
 
 import { AntDesign } from '@expo/vector-icons'; 
 import { useFonts } from 'expo-font';
@@ -14,10 +16,11 @@ import { Controller, useForm } from 'react-hook-form';
 
 const RegistrationScreen = ({ navigation }) => {
   const [isPasswordSecure, setIsPasswordSecure] = useState(true); 
-  const [isAvatar, setIsAvatar] = useState(null);
+  const [image, setImage] = useState(null);
   const [keyboardShown, setKeyboardShown] = useState(false);
 
   const dispatch = useDispatch();
+  const isLogin = useSelector(selectIslogin);
 
   const { control, handleSubmit, reset, formState: {errors}} = useForm()
 
@@ -43,9 +46,13 @@ const RegistrationScreen = ({ navigation }) => {
   };
  
   const submitForm = (data) => {
-    console.log("data", data);
+    data.avatar = image;
     dispatch(authSignUpUser(data));
-    navigation.navigate('Home')
+    console.log("data", data);
+    if(!isLogin){
+     return alert("error")
+    }
+     navigation.navigate('Home')
     handleHideBoard();
     reset();
   }
@@ -72,9 +79,11 @@ const RegistrationScreen = ({ navigation }) => {
             behavior={Platform.OS === "ios" ? "padding" : "height"} style={{width: '100%'}}
           >
             <View style={styles.avatarContainer}>
-                <Image style={styles.avatar}/>
-                <TouchableOpacity >
-                <AntDesign name="pluscircleo" size={24} color="#FF6C00" style={isAvatar ? styles.btnAddAvatarLoad : styles.btnAddAvatar} />
+              {image && (
+                <Image style={styles.avatar} source={{uri: image}}/>
+              )}
+                <TouchableOpacity onPress={() => pickAvatar(setImage)}>
+                <AntDesign name="pluscircleo" size={24} color="#FF6C00" style={image ? styles.btnAddAvatarLoad : styles.btnAddAvatar}/>
                 </TouchableOpacity>
             </View>
               <Text style={styles.textTitle}>Реєстрація</Text>
@@ -100,7 +109,6 @@ const RegistrationScreen = ({ navigation }) => {
               <Controller 
                 control={control}
                 name="email"
-                // value={field.value}
                 rules={{
                   required: { value: true, message: 'Адреса електронної пошти обов\'язкова' },
                   pattern: {

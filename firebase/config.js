@@ -1,26 +1,18 @@
 import { initializeApp } from 'firebase/app';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-// Функція для підключення авторизації в проект
 import { getAuth } from "firebase/auth";
-// Функція для підключення бази даних у проект
 import { getFirestore } from "firebase/firestore";
-// Функція для підключення сховища файлів в проект
 import { getStorage } from "firebase/storage";
-import 'firebase/compat/auth';
-import 'firebase/auth';
 
 const firebaseConfig = {
-  apiKey: "AIzaSyCuF0pId9RJnWzG6jaMb2zvdoJbOwQngb4",
-  authDomain: "nativeproject-955c1.firebaseapp.com",
-  projectId: "nativeproject-955c1",
-  storageBucket: "nativeproject-955c1.appspot.com",
-  messagingSenderId: "322320753743",
-  appId: "1:322320753743:web:0b0e4c8e6a651d51f1763a",
-  measurementId: "G-MCNGHFVRCY"
+  apiKey: "AIzaSyC3aqmIteGrnZ_y6z_8KnczstUB-6KKGn8",
+  authDomain: "expoproject-74957.firebaseapp.com",
+  projectId: "expoproject-74957",
+  storageBucket: "expoproject-74957.appspot.com",
+  messagingSenderId: "467146086659",
+  appId: "1:467146086659:web:61686205702a0d42997136"
 };
 
 export const app = initializeApp(firebaseConfig);
-
 export const auth = getAuth(app);
 export const db = getFirestore(app);
 export const storage = getStorage(app);
