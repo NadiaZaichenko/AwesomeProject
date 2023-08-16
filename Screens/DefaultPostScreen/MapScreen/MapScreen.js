@@ -18,12 +18,12 @@ const MapScreen = ({ route, navigation }) => {
     }
 
     if (route.params) {
-      setLocation(route.params.postLocation) 
-    // console.log(location)
+      setLocation(route.params.location) 
+    console.log(route.params.location)
   };
   }, []);
 
-  console.log(location);
+  // console.log(location);
 
   return (
     <View style={styles.container}>

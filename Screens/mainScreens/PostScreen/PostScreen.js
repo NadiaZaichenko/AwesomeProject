@@ -59,7 +59,7 @@ const PostScreen = ({ navigation , route }) => {
     tabBarIcon: ({ focused }) => (<SimpleLineIcons name="grid" size={24} color={focused ? "#FFF" : "#212121"}/>
     )}}  
       />
-      <NestedScreen.Screen
+    <NestedScreen.Screen
         name="Comments"
         component={CommentScreen}
         options={{

@@ -56,7 +56,7 @@ return (
      <FlatList data={posts} keyExtractor={(item, index) => index.toString()}
      renderItem={({item}) => {
       const locationName = item.data.locationName;
-      const location = item.data.postLocation;
+      const location = item.data.location;
       const photo = item.data.photo;
       const comments = item.data.comments;
       const numberOfComments = comments.length;
@@ -82,17 +82,18 @@ return (
   onPress={() => onLikePressed(item.id)}
   >
   <AntDesign name="like2" size={22} color={numberOfLikes !== 0? '#FF6C00' : "#BDBDBD"} />
+  <Text style={{...styles.commentText, color:numberOfComments !== 0? '#212121' : "#BDBDBD"}}>{numberOfLikes || 0}</Text>
 </TouchableOpacity>
 </View>
 
-{location? <TouchableOpacity
+{location ? <TouchableOpacity
   activeOpacity={0.7}
   style={{...styles.button, marginRight: 30}}
   onPress={() => navigation.navigate('Map', {locationName, location})}
   >
-<Feather style={styles.mapBtn}name="map-pin" size={24} color='#000000'/>
+<Feather name="map-pin" size={22} color='#BDBDBD'/>
   <Text style={styles.locationText}>{locationName}</Text>
-</TouchableOpacity>  : '' }
+</TouchableOpacity>  : <Text style={styles.locationText}>Not location</Text> }
       </View>
     </View>)}}/>
   </View>

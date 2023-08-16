@@ -17,6 +17,7 @@ export const styles = StyleSheet.create({
       fontSize: 16,
       fontWeight: '500',
       marginTop: 5,
+      marginLeft: 5,
   },
   button: {
       justifyContent: 'center',
@@ -46,12 +47,4 @@ export const styles = StyleSheet.create({
       marginLeft: 5, 
       fontSize: 16,
   },
-  mapBtn: {
-    // justifyContent: "center",
-    // alignItems: "center",
-    // marginRight: 20,
-    position: "absolute",
-    top: 80,
-    right: 20
-  }
 })

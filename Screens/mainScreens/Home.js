@@ -47,14 +47,15 @@ const Home = ({navigation}) => {
     name="Публікації"
     component={PostScreen}
     options={({route}) => ({ 
-      tabBarStyle : {
+    tabBarStyle : {
         display: getTabBArVisibility(route),
         height: 83,
         paddingTop: 25,
         paddingRight: 70,
-        paddingLeft: 70,},
+        paddingLeft: 70,
+    },
         headerShown: false,
-      title: "Публікації",
+    title: "Публікації",
     headerTitleAlign: "center",
     headerTitleStyle: {
       fontSize: 17,
