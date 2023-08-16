@@ -2,7 +2,6 @@ import {
     createUserWithEmailAndPassword,
     signInWithEmailAndPassword,
     updateProfile,
-    onAuthStateChanged,
     signOut,
   } from 'firebase/auth';
   import { createAsyncThunk } from '@reduxjs/toolkit';
@@ -10,17 +9,20 @@ import {
 
   export const authSignUpUser = createAsyncThunk(
     'auth/register',
-    async ({ email, password, name }, thunkAPI) => {
+    async (data, thunkAPI) => {
       try {
-        const data = await createUserWithEmailAndPassword(auth, email, password);
+        await createUserWithEmailAndPassword(auth, data.email, data.password);
+        
         const user = auth.currentUser;
+        console.log(user, data.name)
         console.log('user register====> ', user);
   
-        refreshUser({ displayName: name });
+        refreshUser({ displayName: data.name, avatarUrl: data.avatar});
+
         return {
           email: user.email,
           uid: user.uid,
-          displayName: user.name,
+          displayName: data.name,
         };
 
       } catch (error) {
@@ -31,18 +33,15 @@ import {
 
   export const authSignInUser = createAsyncThunk(
     'auth/logIn',
-    async ({name,  email, password}, thunkAPI) => {
+    async ({ email, password}, thunkAPI) => {
       try {
-        const data = await signInWithEmailAndPassword(auth, email, password);
+        await signInWithEmailAndPassword(auth, email, password);
         const user = auth.currentUser;
         console.log('user login====> ', user);
-  
-        refreshUser({ displayName: name });
   
         return {
           email: user.email,
           uid: user.uid,
-          displayName: user.name,
         };
       } catch (error) {
         return thunkAPI.rejectWithValue(error.message);
@@ -61,3 +60,16 @@ import {
       return thunkAPI.rejectWithValue(error.message);
     }
   });
+
+  export const refreshUser = async (update) => {
+
+    const user = auth.currentUser;
+  
+    if (user) {
+          try {
+              await updateProfile(user, update);
+          } catch(error) {
+              throw error
+          }
+    }
+  };

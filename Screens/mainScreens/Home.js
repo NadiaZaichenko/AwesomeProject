@@ -55,25 +55,6 @@ const Home = ({navigation}) => {
         paddingLeft: 70,},
         headerShown: false,
       title: "Публікації",
-      headerRight: ({focused}) => (
-     <View style={{
-      display: "flex",
-      paddingRight: 10,
-      flexDirection: "row",
-      justifyContent: "flex-end",
-      alignItems: "center",
-      height: 57,
-      width: "300%",
-      borderBottomWidth: 1,
-      borderColor: "#BDBDBD",}}>
-       <TouchableOpacity
-        onPress={() => navigation.navigate("Login")}
-      >
-        <Feather name="log-out" size={24} color={focused ? "rgba(33, 33, 33, 0.8)" : "#BDBDBD"} />
-      </TouchableOpacity>
-
-     </View>
-    ),
     headerTitleAlign: "center",
     headerTitleStyle: {
       fontSize: 17,

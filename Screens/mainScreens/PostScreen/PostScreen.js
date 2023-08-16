@@ -4,7 +4,8 @@ import { View, TouchableOpacity } from 'react-native';
 import { SimpleLineIcons } from '@expo/vector-icons';
 import { AntDesign } from '@expo/vector-icons';
 import { Feather } from '@expo/vector-icons';
-
+import { logOut } from '../../../redux/auth/authOperation';
+import { useDispatch } from 'react-redux';
 import NestedPostScreen from '../../DefaultPostScreen/NestedPostScreen/NastedPostScreen';
 import CommentScreen from '../../DefaultPostScreen/CommentScreen/CommentScreen';
 import MapScreen from '../../DefaultPostScreen/MapScreen/MapScreen';
@@ -14,6 +15,12 @@ import { styles } from './PostScreen.styled';
 const NestedScreen = createStackNavigator();
 
 const PostScreen = ({ navigation , route }) => {
+  const dispatch = useDispatch()
+
+  const logOutFunc = () => {
+    dispatch(logOut())
+    navigation.navigate("Login")
+  }
 
   return (
     <NestedScreen.Navigator initialRouteName="NestedPostScreen" 
@@ -35,7 +42,7 @@ const PostScreen = ({ navigation , route }) => {
       borderBottomWidth: 1,
       borderColor: "#BDBDBD",}}>
        <TouchableOpacity
-        onPress={() => navigation.navigate("Login")}
+        onPress={logOutFunc}
       >
         <Feather name="log-out" size={24} color={focused ? "rgba(33, 33, 33, 0.8)" : "#BDBDBD"} />
       </TouchableOpacity>
@@ -61,7 +68,7 @@ const PostScreen = ({ navigation , route }) => {
           title: 'Коментарі',
           headerLeft: () => (
             <AntDesign name="arrowleft" size={24} 
-            onPress={() => navigation.goBack()}
+            onPress={() => navigation.navigate('NestedPostScreen')}
             title="Return back"
             color="#000"
             style={{
@@ -80,7 +87,7 @@ const PostScreen = ({ navigation , route }) => {
           title: 'Карта',
           headerLeft: () => (
             <AntDesign name="arrowleft" size={24} 
-              onPress={() => navigation.goBack()}
+              onPress={() => navigation.navigate('NestedPostScreen')}
               title="Return back"
               color="#000"
               style={{

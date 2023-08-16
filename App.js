@@ -25,8 +25,8 @@ export default function App() {
       <Part.Navigator 
      screenOptions={{headerShown: false}}
      > 
-      <Part.Screen name="Registration" component={RegistrationScreen}/>
       <Part.Screen name="Login" component={LoginScreen}/>
+      <Part.Screen name="Registration" component={RegistrationScreen}/>
       <Part.Screen name="Home" component={Home}/> 
       </Part.Navigator>
   </NavigationContainer>

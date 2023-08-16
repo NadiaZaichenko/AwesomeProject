@@ -2,9 +2,10 @@ import React, { useState, useEffect}from 'react';
 import { View, TouchableOpacity, Text, TextInput, ImageBackground, KeyboardAvoidingView, TouchableWithoutFeedback, Keyboard} from 'react-native';
 import {useFonts } from 'expo-font';
 import * as Font from 'expo-font';
-import {styles} from './LoginScreen.styled'
+import {styles} from './LoginScreen.styled';
+import {selectIslogin} from '../../../redux/auth/authSelectors';
 import { useForm, Controller } from 'react-hook-form';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { authSignInUser } from '../../../redux/auth/authOperation';
 
 
@@ -12,6 +13,7 @@ const LoginScreen = ({navigation}) => {
   const { control, handleSubmit, formState: { errors }, reset  } = useForm();
 
   const dispatch = useDispatch();
+  const isLoginTrue = useSelector(selectIslogin);
 
   const [isPasswordSecure, setIsPasswordSecure] = useState(true);
   const [keyboardShown, setKeyboardShown] = useState(false);
@@ -39,8 +41,11 @@ const LoginScreen = ({navigation}) => {
 
   const onSubmit = (data) => {
     dispatch(authSignInUser(data))
+    if(!isLoginTrue) {
+      return alert("Not found this user")
+    }
+    navigation.navigate("Home");
     handleHideBoard();
-    navigation.navigate("Home", { user: {...data} });
     reset();
   };
 

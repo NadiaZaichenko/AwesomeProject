@@ -1,20 +1,21 @@
 import { useEffect, useState } from 'react';
 import { useNavigation, useIsFocused } from '@react-navigation/native';
-import { FontAwesome } from '@expo/vector-icons';
-import { Feather } from '@expo/vector-icons';
+import { FontAwesome,Feather } from '@expo/vector-icons';
 import { Camera } from 'expo-camera';
 import * as MediaLibrary from 'expo-media-library';
 import { styles } from "./CreatePostScreen.styled";
-
 import * as Location from 'expo-location';
+import {  Image, Keyboard, KeyboardAvoidingView, TouchableWithoutFeedback, TextInput, TouchableOpacity, Text, View} from 'react-native';
+import { uploadPhoto } from '../../../firebase/uploadPhoto';
 
-// import * as DocumentPicker from 'expo-document-picker';
-import {  Image, Keyboard, KeyboardAvoidingView} from 'react-native';
+import { ref, getDownloadURL, uploadBytes  } from "firebase/storage";
+import { storage, db } from '../../../firebase/config';
+import { addDoc, collection } from 'firebase/firestore';
+import { useSelector } from 'react-redux';
+import { selectName, selectUserId } from '../../../redux/auth/authSelectors';
 
-import { TouchableWithoutFeedback, TextInput, TouchableOpacity, Text, View } from 'react-native';
-
-const CreatePostScreen = () => {
-  const navigation = useNavigation();
+const CreatePostScreen = ({navigation}) => {
+  // const navigation = useNavigation();
   const isFocused = useIsFocused();
 
   const [hasPermission, setHasPermission] = useState(null);
@@ -28,10 +29,11 @@ const CreatePostScreen = () => {
   const [isShowKeyboard, setIsShowKeyboard] = useState(false);
   const [currentFocused, setCurrentFocused] = useState('');
 
-  useEffect(() => {
-    setPostImg('');
-    setPostLocation(null);
+  const userId = useSelector(selectUserId);
+  const userName = useSelector(selectName);
 
+
+  useEffect(() => {
     (async () => {
       const { status } = await Camera.requestCameraPermissionsAsync();
       await MediaLibrary.requestPermissionsAsync();
@@ -46,6 +48,19 @@ const CreatePostScreen = () => {
       }
     })();
   }, []);
+
+const onLoadPostImg = async () => {
+    if (cameraRef) {
+      try {
+        const { uri } = await cameraRef.takePictureAsync();
+        await MediaLibrary.createAssetAsync(uri);
+        setPostImg(uri);
+      } catch (error) {
+        console.log('Error > ', error.message);
+      }
+    }
+    addImageLocation();
+  };
 
   const addImageLocation = async () => {
     const location = await Location.getCurrentPositionAsync({});
@@ -63,6 +78,7 @@ const CreatePostScreen = () => {
     setPostLocation(coords);
   };
 
+
   const clearForm = () => {
     setPostImg('');
     setPostName('');
@@ -70,34 +86,46 @@ const CreatePostScreen = () => {
     setPostLocation(null);
   };
 
-  const onSubmitPost = () => {
+    const uploadPost = async () => {
+      const url = await uploadPhoto(postImg, "images");
+      console.log(url);
+  
+      try {
+        const postsRef = collection(db, "posts");
+        const postId = Date.now().toString();
+        console.log(postsRef);
+        const newPost = {
+        photo: url,
+        postId,
+        title: postName,
+        locationName: postAddress,
+        location: postLocation,
+        comments: [],
+        likes: 0,
+        userId,
+        nickName: userName,
+        timePublished: +Date.now(),
+        };
+        const publish = await addDoc(collection(db, 'posts'), newPost)
+        console.log(publish)
+        // await setDoc(doc(postsRef, `${postId}`), newPost);      
+      } catch (error) {
+        return alert("Error adding document: ", error.message);
+      }
+    };
+
+  const onSubmitPost = async() => {
     if (!postImg || !postName.trim() || !postLocation)
       return console.warn('Будь ласка завантажте фото та заповніть поля');
 
     console.log({ postImg, postName, postAddress, postLocation });
-
     handleKeyboardHide();
-    navigation.navigate('NestedPostScreen', {
-      postImg,
-      postName: postName.trim(),
-      postAddress: postAddress.trim(),
-      postLocation,
-    });
+    await uploadPost();
+    navigation.navigate('NestedPostScreen', {postImg});
     clearForm();
   };
 
-  const onLoadPostImg = async () => {
-    if (cameraRef) {
-      try {
-        const { uri } = await cameraRef.takePictureAsync();
-        await MediaLibrary.createAssetAsync(uri);
-        setPostImg(uri);
-      } catch (error) {
-        console.log('Error > ', error.message);
-      }
-    }
-    addImageLocation();
-  };
+  
 
   const handleFocus = (currentFocusInput = '') => {
     setIsShowKeyboard(true);

@@ -3,12 +3,11 @@ import { createSlice } from "@reduxjs/toolkit";
 import { authSignUpUser, authSignInUser,logOut  } from "./authOperation";
 
 const initialState = {
-   user: { name: null, 
+    name: null, 
     email: null,
     password: null,  
     avatar: null,
-},
-    userId: null,
+    uid: null,
     isLogin: false,
 };
 
@@ -17,21 +16,24 @@ export const authSlice = createSlice({
     initialState,
     extraReducers: (builder) => {
         builder
+         .addCase(authSignUpUser.fulfilled, (state, action) => {
+            state.name = action.payload.displayName;
+            state.email = action.payload.email;
+            state.uid = action.payload.uid;
+            state.isLogin = true;
+            state.avatar = action.payload.avatar;
+          })
           .addCase(authSignInUser.fulfilled, (state, action) => {
-            state.user.email = action.payload.email;
+            state.email = action.payload.email;
             state.uid = action.payload.uid;
             state.isLogin = true;
           })
           .addCase(logOut.fulfilled, (state) => {
-            state.user = { name: null, email: null, password: null };
+            state.name = null, 
+            state.email= null, 
+            state.password= null 
             state.uid = null;
             state.isLogin = false;
-          })
-          .addCase(authSignUpUser.fulfilled, (state, action) => {
-            state.user.name = action.payload.displayName;
-            state.user.email = action.payload.email;
-            state.userId = action.payload.userId;
-            state.isLogin = true;
           })
       },
 });

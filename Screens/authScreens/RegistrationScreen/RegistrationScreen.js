@@ -21,7 +21,14 @@ const RegistrationScreen = ({ navigation }) => {
   const dispatch = useDispatch();
   const isLogin = useSelector(selectIslogin);
 
-  const { control, handleSubmit, reset, formState: {errors}} = useForm()
+  const { control, handleSubmit, reset, formState: {errors}} = useForm({
+    mode: "all",
+    defaultValues: {
+      name: "",
+      email: "",
+      password: "",
+    },
+  })
 
   useEffect(() => {
     Keyboard.addListener('keyboardDidShow', handleKeyboardDidShow);
@@ -48,9 +55,10 @@ const RegistrationScreen = ({ navigation }) => {
     data.avatar = image;
     dispatch(authSignUpUser(data));
     console.log("data", data); 
-    // if(!isLogin){
-    //   return alert("error")
-    //  }
+    if(!isLogin){
+      return alert("error")
+     }
+
     navigation.navigate('Home')
     handleHideBoard();
     reset();
@@ -108,7 +116,6 @@ const RegistrationScreen = ({ navigation }) => {
               <Controller 
                 control={control}
                 name="email"
-                // value={field.value}
                 rules={{
                   required: { value: true, message: 'Адреса електронної пошти обов\'язкова' },
                   pattern: {

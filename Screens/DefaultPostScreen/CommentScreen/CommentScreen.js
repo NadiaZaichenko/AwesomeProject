@@ -3,54 +3,63 @@ import { FlatList, Image,Text, TextInput } from 'react-native';
 import { View } from 'react-native';
 import { useEffect, useState } from 'react';
 import CommentItem from '../../../component/CommentItem/CommentItem';
+import { updateDoc, doc } from 'firebase/firestore';
+import { db } from '../../../firebase/config';
 import { Keyboard } from 'react-native';
 import { useIsFocused } from '@react-navigation/native';
 import { styles } from './CommentScreen.styled';
 import { AntDesign } from '@expo/vector-icons';
 
-const CommentScreen = ({ navigation, route: { params } }) => {
+const CommentScreen = ({ route }) => {
   const isFocused = useIsFocused();
 
   const [commentText, setCommentText] = useState('');
-  const [comments, setComment] = useState([
-    {
-      autorAvatar: '',
-      comment: 'Comment 1sknnn',
-      date: '09 червня, 2023 | 08:40',
-    },
-    {
-      autorAvatar: '',
-      comment: 'Comment 2sknnn',
-      date: '09 червня, 2023 | 08:40',
-    },
-    {
-      autorAvatar: '',
-      comment: 'Comment 3sknnn',
-      date: '09 червня, 2023 | 08:40',
-    },
-  ]);
+  const [allComments, setAllComments] = useState([]);
+
+  const {photo} = route.params;
+  const {postId} = route.params;
+  const {comments} =  route.params;
+  const {postImg} = route.params;
 
   useEffect(() => {
-    if (isFocused) {
-      navigation?.getParent('home')?.setOptions({
-        tabBarStyle: { display: 'none' },
-        headerShown: false,
-      });
+    if (comments && comments.length > 0) {
+      setAllComments(comments)
     }
-  }, []);
+  }, [comments])
 
-  const handleAddComment = () => {
-    if (!commentText.trim()) return console.warn('Будь ласка напишіть коментар');
-    const data = {
-      autorAvatar: '',
+  // const handleAddComment = () => {
+  //   if (!commentText.trim()) return console.warn('Будь ласка напишіть коментар');
+  //   const data = {
+  //     autorAvatar: '',
+  //     comment: commentText,
+  //     date: '09 червня, 2023 | 08:40',
+  //   };
+
+  //   setAllComments(prev => [...prev, data]);
+  //   handleKeyboardHide();
+  //   setCommentText('');
+  // };
+
+  const createComment = async () => {
+    // keyBoardHide();
+    const commentData = {
+      time: new Date(),
       comment: commentText,
-      date: '09 червня, 2023 | 08:40',
+      id: postId,
+    };
+    setAllComments((prevState) => [...prevState, commentData]);
+    try {
+      const postRef = doc(db, "posts", postId);
+      await updateDoc(postRef, {
+        comments: [...comments, commentData],
+      });
+      console.log("document updated");
+    } catch (error) {
+      console.error("Error adding comment:", error);
+    }
+    setCommentText('');
     };
 
-    setComment(prev => [...prev, data]);
-    handleKeyboardHide();
-    setCommentText('');
-  };
 
   const handleKeyboardHide = () => {
     Keyboard.dismiss();
@@ -59,10 +68,10 @@ const CommentScreen = ({ navigation, route: { params } }) => {
   return (
     <TouchableWithoutFeedback onPress={handleKeyboardHide}>
       <View style={styles.container}>
-        <Image style={styles.postImg} source={{ uri: params.postImg }} />
+        <Image style={styles.postImg} source={{ uri: postImg }} />
         <FlatList
           style={styles.commentList}
-          data={comments}
+          data={allComments}
           renderItem={({ item }) => (
             <CommentItem comment={item.comment} date={item.date} autorAvatar={item.autorAvatar} />
           )}
@@ -81,7 +90,7 @@ const CommentScreen = ({ navigation, route: { params } }) => {
               value={commentText}
               onChangeText={setCommentText}
             />
-            <TouchableOpacity style={styles.commentBtn} onPress={handleAddComment}>
+            <TouchableOpacity activeOpacity={0.7} style={styles.commentBtn} onPress={createComment}>
             <AntDesign name="arrowup" size={22} color="#FFFFFF" />
             </TouchableOpacity>
           </View>

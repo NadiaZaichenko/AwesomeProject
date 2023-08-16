@@ -1,55 +1,102 @@
-import { FlatList, Image } from 'react-native';
-// import { Dimensions, Keyboard, KeyboardAvoidingView, StyleSheet } from 'react-native';
-import { Text, View } from 'react-native';
+import { FlatList, Image, Text, View, TouchableOpacity } from 'react-native';
 import { styles } from './NestedPostScreen.styled';
 import { useEffect, useState } from 'react';
-import PostsItem from '../../../component/PostItem/PostItem';
+import { collection, getDocs, updateDoc, doc, getDoc } from 'firebase/firestore';
+import { db } from '../../../firebase/config';
+import { useNavigation, useIsFocused  } from '@react-navigation/native';
+import { Feather, EvilIcons, AntDesign} from '@expo/vector-icons';
 
 const NestedPostScreen = ({ route }) => {
-  const [posts, setPosts] = useState([
-    {
-      // id: 'catty',
-      postImg:
-        'file:///data/user/0/host.exp.exponent/cache/ExperienceData/%2540anonymous%252FAwesomeProject-71fbbe2e-6fda-4603-96ba-05ca137c0f17/Camera/5421a1be-1b95-42a6-94f6-5e0afc2cf8dd.jpg',
-      postName: 'nature',
-      postAddress: 'Ukraine',
-      postLocation: {  latitude: 37.4220936,
-        longitude: -122.083922, },
-    },
-  ]);
+  const [posts, setPosts] = useState([]);
+  const navigation = useNavigation();
+  const isFocused = useIsFocused(); 
 
   useEffect(() => {
-    if (!route.params) return;
+    if (isFocused) {
+        getDataFromFirestore(); 
+      }
+}, [])
 
-    setPosts(prev => [...prev, route.params]);
-  }, [route.params]);
-
-  return (
-    <View style={styles.container}>
-      <View style={styles.avatarWrapper}>
-        <Image style={styles.avatarImg} source={require("../../../assets/images/avatar.jpg")}/>
-        <View>
-          <Text style={styles.avatarName}>Natali Romanova</Text>
-          <Text style={styles.avatarEmail}>email@example.com</Text>
-        </View>
-      </View>
-      <FlatList
-        style={styles.postsWrapper}
-        data={posts}
-        renderItem={({ item }) => (
-          <PostsItem
-            postName={item.postName}
-            postImg={item.postImg}
-            postAddress={item.postAddress}
-            postLocation={item.postLocation}
-          />
-        )}
-        keyExtractor={(item, idx) => idx.toString()}
-      />
-      <View style={styles.navTabs}></View>
-    </View>
-  );
+const getDataFromFirestore = async () => {
+  try {
+  try {
+      const snapshot = await getDocs(collection(db, 'posts'));
+      let arr = [];
+      snapshot.forEach((doc) => arr.push({ id: doc.id, data: doc.data()}));
+      setPosts(arr);
+  } catch (error) {
+    console.log(error.message);
+          throw error;
+  }
+  } catch (error) {
+    console.log(error.message);
+          throw error;
+  }
 };
 
+const onLikePressed = async (postId) => {
+  try {
+      const postRef = doc(db, "posts", postId);
+      const postSnapshot = await getDoc(postRef);
+      const postLikes = postSnapshot.data().likes;
+      const updatedLikes = Number(postLikes + 1);
+  
+      await updateDoc(postRef, {
+        likes: updatedLikes,
+      });
+      console.log("Document likes updated");
+    } catch (error) {
+      console.error("Error adding like:", error);
+    }
+}
+
+
+return (
+  <View style={styles.container}>
+     <FlatList data={posts} keyExtractor={(item, index) => index.toString()}
+     renderItem={({item}) => {
+      const locationName = item.data.locationName;
+      const location = item.data.postLocation;
+      const photo = item.data.photo;
+      const comments = item.data.comments;
+      const numberOfComments = comments.length;
+      const numberOfLikes = item.data.likes;
+
+     return (<View style={styles.postContainer}>
+      <Image source={{uri: photo}} style={styles.image}/>
+      {locationName? <Text style={styles.text}>{locationName}</Text> : '' }
+      <View style={styles.btnContainer}>
+      <View style={styles.leftButtonsContainer}>
+      <TouchableOpacity
+  activeOpacity={0.7}
+  style={styles.button}
+  onPress={() => navigation.navigate('Comments', {photo: item.data.photo, postId: item.id, comments})}
+  >
+  <EvilIcons name="comment" size={26} color={numberOfComments !== 0? '#FF6C00' : "#BDBDBD"} />
+  <Text style={{...styles.commentText, color:numberOfComments !== 0? '#212121' : "#BDBDBD"}}>{numberOfComments || 0}</Text>
+</TouchableOpacity>
+
+<TouchableOpacity
+  activeOpacity={0.7}
+  style={{...styles.button, marginLeft: 24}}
+  onPress={() => onLikePressed(item.id)}
+  >
+  <AntDesign name="like2" size={22} color={numberOfLikes !== 0? '#FF6C00' : "#BDBDBD"} />
+</TouchableOpacity>
+</View>
+
+{location? <TouchableOpacity
+  activeOpacity={0.7}
+  style={{...styles.button, marginRight: 30}}
+  onPress={() => navigation.navigate('Map', {locationName, location})}
+  >
+<Feather style={styles.mapBtn}name="map-pin" size={24} color='#000000'/>
+  <Text style={styles.locationText}>{locationName}</Text>
+</TouchableOpacity>  : '' }
+      </View>
+    </View>)}}/>
+  </View>
+)
+}
 export default NestedPostScreen;
 
