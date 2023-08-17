@@ -56,9 +56,8 @@ const RegistrationScreen = ({ navigation }) => {
     dispatch(authSignUpUser(data));
     console.log("data", data); 
     if(!isLogin){
-      return alert("error")
+      return alert("Something wrong, try again")
      }
-
     navigation.navigate('Home')
     handleHideBoard();
     reset();

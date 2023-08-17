@@ -13,8 +13,6 @@ import {
  import { useNavigation, useIsFocused  } from '@react-navigation/native';
  import {  useSelector, useDispatch } from "react-redux";
  import { selectUserId, selectName } from "../../../redux/auth/authSelectors";
-//  import bgImage from '../assets/PhotoBg.png';
-//  import avatar from '../assets/avatar.png';
  import { Ionicons } from '@expo/vector-icons';
  import { EvilIcons } from '@expo/vector-icons';
  import { AntDesign } from '@expo/vector-icons';
