@@ -15,7 +15,6 @@ import { useSelector } from 'react-redux';
 import { selectName, selectUserId } from '../../../redux/auth/authSelectors';
 
 const CreatePostScreen = ({navigation}) => {
-  // const navigation = useNavigation();
   const isFocused = useIsFocused();
 
   const [hasPermission, setHasPermission] = useState(null);
@@ -88,12 +87,9 @@ const onLoadPostImg = async () => {
 
     const uploadPost = async () => {
       const url = await uploadPhoto(postImg, "images");
-      console.log(url);
-  
       try {
         const postsRef = collection(db, "posts");
         const postId = Date.now().toString();
-        console.log(postsRef);
         const newPost = {
         photo: url,
         postId,
@@ -107,8 +103,6 @@ const onLoadPostImg = async () => {
         timePublished: +Date.now(),
         };
         const publish = await addDoc(collection(db, 'posts'), newPost)
-        console.log(publish)
-        // await setDoc(doc(postsRef, `${postId}`), newPost);      
       } catch (error) {
         return alert("Error adding document: ", error.message);
       }

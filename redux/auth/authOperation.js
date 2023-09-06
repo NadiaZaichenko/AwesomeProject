@@ -14,9 +14,6 @@ import {
         await createUserWithEmailAndPassword(auth, data.email, data.password);
         
         const user = auth.currentUser;
-        console.log(user, data.name)
-        console.log('user register====> ', user);
-  
         refreshUser({ displayName: data.name, avatarUrl: data.avatar});
 
         return {
@@ -37,7 +34,6 @@ import {
       try {
         await signInWithEmailAndPassword(auth, email, password);
         const user = auth.currentUser;
-        console.log('user login====> ', user);
   
         return {
           email: user.email,

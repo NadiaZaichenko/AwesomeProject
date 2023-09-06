@@ -26,11 +26,11 @@ const getDataFromFirestore = async () => {
       setPosts(arr);
   } catch (error) {
     console.log(error.message);
-          throw error;
+    throw error;
   }
   } catch (error) {
     console.log(error.message);
-          throw error;
+    throw error;
   }
 };
 

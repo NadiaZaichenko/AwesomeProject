@@ -1,5 +1,5 @@
 import { KeyboardAvoidingView, TouchableOpacity, TouchableWithoutFeedback } from 'react-native';
-import { FlatList, Image,Text, TextInput } from 'react-native';
+import { FlatList, Image, TextInput } from 'react-native';
 import { View } from 'react-native';
 import { useEffect, useState } from 'react';
 import CommentItem from '../../../component/CommentItem/CommentItem';
@@ -19,7 +19,6 @@ const CommentScreen = ({ route }) => {
   const {photo} = route.params;
   const {postId} = route.params;
   const {comments} =  route.params;
-  const {postImg} = route.params;
 
   useEffect(() => {
     if (comments && comments.length > 0) {
@@ -27,21 +26,8 @@ const CommentScreen = ({ route }) => {
     }
   }, [comments])
 
-  // const handleAddComment = () => {
-  //   if (!commentText.trim()) return console.warn('Будь ласка напишіть коментар');
-  //   const data = {
-  //     autorAvatar: '',
-  //     comment: commentText,
-  //     date: '09 червня, 2023 | 08:40',
-  //   };
-
-  //   setAllComments(prev => [...prev, data]);
-  //   handleKeyboardHide();
-  //   setCommentText('');
-  // };
 
   const createComment = async () => {
-    // keyBoardHide();
     const commentData = {
       time: new Date(),
       comment: commentText,
@@ -68,7 +54,7 @@ const CommentScreen = ({ route }) => {
   return (
     <TouchableWithoutFeedback onPress={handleKeyboardHide}>
       <View style={styles.container}>
-        <Image style={styles.postImg} source={{ uri: postImg }} />
+        <Image style={styles.postImg} source={{ uri: photo }} />
         <FlatList
           style={styles.commentList}
           data={allComments}

@@ -54,7 +54,6 @@ const RegistrationScreen = ({ navigation }) => {
   const submitForm = (data) => {
     data.avatar = image;
     dispatch(authSignUpUser(data));
-    console.log("data", data); 
     if(!isLogin){
       return alert("Something wrong, try again")
      }

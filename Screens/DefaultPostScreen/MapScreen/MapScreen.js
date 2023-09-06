@@ -19,11 +19,8 @@ const MapScreen = ({ route, navigation }) => {
 
     if (route.params) {
       setLocation(route.params.location) 
-    console.log(route.params.location)
   };
   }, []);
-
-  // console.log(location);
 
   return (
     <View style={styles.container}>
